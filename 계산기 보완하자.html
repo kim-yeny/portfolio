@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <title>계산기</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
+        font-family: 'Godo';
+        -ms-user-select: none;
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    
+    #wrap{
+        margin: 30px auto 0 auto;
+        width: 480PX;
+        height: 600px;
+        border: 3px solid tomato;
+        background: lightsalmon;
+        text-align: center;
+        border-radius: 10%;
+        box-shadow: 2px 2px 8px gray;
+        padding-top: 7px;
+        top: 50%;
+    }
+
+    #space input{
+        width: 80%;
+        height: 50px;
+        border: 2px solid tomato;
+        background: darkred;
+        padding: 0 5px;
+        margin: 20px 0 20px 0;
+        font-family: 둥근모꼴;
+        font-size: 50px;
+        color: white;
+    }
+
+    #key {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    ul{
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    li{
+        list-style: none;
+        float: left;
+        margin: 1px;
+        font-family: 둥근모꼴;
+
+    }
+    li input{
+        cursor: pointer;
+        margin: 0 auto;
+        font-size: 30px;
+        background: white;
+        width: 90px;
+        height: 90px;
+        line-height: 25px;
+        border-radius: 50px;
+        font-family: 둥근모꼴;
+        margin: 2px;
+    }
+    li:nth-child(3) #btn1{
+        width:180px;
+        font-size: 50px;
+    }
+    #btn{
+        background: tomato;
+    }
+    #btn1{
+        background: coral;
+    }
+
+    input[type=button]:focus, input[type=text]:focus {
+        outline: none !important;
+    }
+</style>
+<body>
+    <div id="wrap">
+        <div id="space">
+            <input type="text" id=numSpace>
+        </div>
+        <div id="key">
+            <ul>
+            <li><input id="btn1" type="button" value="AC" onclick="ac()"></li>
+            <li><input id="btn1" type="button" value="CE" onclick="ce()"></li>
+            <li><input id="btn1" type="button" value="=" onclick="result()"></li>
+            <li><input id="Num" type="button" value="1" onclick="addNum(1)"></li>
+            <li><input id="Num" type="button" value="2" onclick="addNum(2)"></li>
+            <li><input id="Num" type="button" value="3" onclick="addNum(3)"></li>
+            <li><input id="btn" type="button" value="+" onclick="addNum('+')"></li>
+            <li><input id="Num" type="button" value="4" onclick="addNum(4)"></li>
+            <li><input id="Num" type="button" value="5" onclick="addNum(5)"></li>
+            <li><input id="Num" type="button" value="6" onclick="addNum(6)"></li>
+            <li><input id="btn" type="button" value="-" onclick="addNum('-')"></li>
+            <li><input id="Num" type="button" value="7" onclick="addNum(7)"></li>
+            <li><input id="Num" type="button" value="8" onclick="addNum(8)"></li>
+            <li><input id="Num" type="button" value="9" onclick="addNum(9)"></li>
+            <li><input id="btn" type="button" value="*" onclick="addNum('*')"></li>
+            <li><input id="Num" type="button" value="0" onclick="addNum(0)"></li>
+            <li><input id="Num" type="button" value="00" onclick="addNum('00')"></li>
+            <li><input id="btn" type="button" value="." onclick="addNum('.')"></li>
+            <li><input id="btn" type="button" value="/" onclick="addNum('/')"></li>
+            </ul>
+        </div>    
+    </div>
+
+</body>
+<script>
+    var flag=0;
+    
+    function addNum(n) {
+        var numSpace=document.getElementById("numSpace");
+        if(flag==1){
+            if(isNaN(numSpace.value) == true) {
+				console.log("입력된 값 : " + numSpace.value + " / 문자");
+                numSpace.value="";
+            numSpace.value=numSpace.value+n;
+			} else {
+				console.log("입력된 값 : " + numSpace.value + " / 숫자");
+            numSpace.value=numSpace.value+n;
+			}
+            // numSpace.value="";
+            // numSpace.value=numSpace.value+n;
+            flag=0;
+            console.log(flag);
+        } else{
+            numSpace.value=numSpace.value+n;
+            console.log(flag);
+        }
+    }
+    function ac() {
+        numSpace.value="";
+    }
+    function ce() {
+        numSpace.value=numSpace.value.substring(0,numSpace.value.length-1);
+    }
+    function result() {
+        numSpace.value=eval(numSpace.value);
+        flag=1;
+            console.log(flag);
+    }
+
+    $(document)
+    .keyup(function(event){
+        var input = $( "#numSpace" );
+        var flag=0;
+
+		switch (event.keyCode) {
+		case 96:
+            input.val( input.val() + 0 );
+			break;
+		case 97:
+            input.val( input.val() + 1 );
+			break;
+		case 98:
+            input.val( input.val() + 2 );
+			break;
+		case 99:
+            input.val( input.val() + 3 );
+			break;
+		case 100:
+            input.val( input.val() + 4 );
+			break;
+		case 101:
+            input.val( input.val() + 5 );
+			break;
+		case 102:
+            input.val( input.val() + 6 );
+			break;
+		case 103:
+            input.val( input.val() + 7 );
+			break;
+		case 104:
+            input.val( input.val() + 8 );
+			break;
+		case 105:
+            input.val( input.val() + 9 );
+			break;
+		case 8:
+            ce(); //Backspace
+			break;
+		case 13:
+            result(); //Enter
+			break;
+		case 107:
+            addNum('+'); //Plus
+			break;
+		case 109:
+            addNum('-'); //Minus
+			break;
+		case 106:
+            addNum('*'); //Multiple
+			break;
+		case 111:
+            addNum('/'); //Divide
+			break;
+		default:
+			break;
+		}
+    })
+</script>
+</html>
